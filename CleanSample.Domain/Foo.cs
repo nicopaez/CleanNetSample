@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CleanSample.Domain
 {
-    public class Class1
+    public class Foo
     {
+        public string DoFoo()
+        {
+            return "Foo";
+        }
     }
 }

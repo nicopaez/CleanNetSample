@@ -24,16 +24,16 @@
 
  <Target Name="Test" DependsOnTargets="Build">
     <PropertyGroup>
-      <NUnitExe>"C:\BuildTools\NUnit\nunit-console\nunit3-console.exe"</NUnitExe>
+      <NUnitExe>.\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe</NUnitExe>
     </PropertyGroup>
     <CreateItem Include="**\bin\Debug\*Tests.dll">
       <Output TaskParameter="Include" ItemName="TestAssemblies" />
     </CreateItem>
-    <Exec Command="$(NUnitExe) @(TestAssemblies,' ') --result:TestResult.xml;transform=C:\BuildTools\NUnit\nunit3-junit.xslt" />
+    <Exec Command="$(NUnitExe) @(TestAssemblies,' ') --result:TestResult.xml" />
   </Target>
   
    <PropertyGroup>
-      <OpenCoverMSBuildTasksPath>C:\BuildTools\OpenCover\MSBuild</OpenCoverMSBuildTasksPath>
+      <OpenCoverMSBuildTasksPath>\packages\OpenCover.4.6.519\MSBuild</OpenCoverMSBuildTasksPath>
       <OpenCoverMSBuildTasksLib>$(OpenCoverMSBuildTasksPath)\OpenCover.MSBuild.dll</OpenCoverMSBuildTasksLib>
     </PropertyGroup>
 
@@ -43,9 +43,9 @@
     <CreateItem Include="**\bin\Debug\*Tests.dll">
       <Output TaskParameter="Include" ItemName="TestAssemblies" />
     </CreateItem>
-    <Exec Command="C:\BuildTools\OpenCover\OpenCoverConsole\OpenCover.Console.exe -register:user -showunvisited -returntargetcode -target:C:\BuildTools\NUnit\nunit-console\nunit3-console.exe -targetargs:&quot;@(TestAssemblies,' ') --result:TestResult.xml;transform=C:\BuildTools\NUnit\nunit3-junit.xslt&quot; -filter:&quot;+[Intelligize*]* -[*.Tests]*&quot; -excludebyattribute:System.ObsoleteAttribute -output:coverage-results.xml" />
-    <Exec Command="C:\BuildTools\OpenCover\ReportGenerator\ReportGenerator.exe -reports:coverage-results.xml -targetDir:CodeCoverageHTML" />
-    <Exec Command="c:\BuildTools\OpenCover\OpenCoverToCobertura\OpenCoverToCoberturaConverter.exe -input:coverage-results.xml -output:Cobertura.xml -sources:CodeCoverageHTML" />
+    <Exec Command=".\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -showunvisited -returntargetcode -target:.\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe -targetargs:&quot;@(TestAssemblies,' ') --result:TestResult.xml&quot; -filter:&quot;+[*]* -[*.tests]* -[*.Tests]*&quot; -excludebyattribute:System.ObsoleteAttribute -output:coverage-results.xml" />
+    <Exec Command=".\packages\ReportGenerator.3.0.2\tools\ReportGenerator.exe -reports:coverage-results.xml -targetDir:CodeCoverageHTML" />
+    <Exec Command=".\packages\OpenCoverToCoberturaConverter.0.2.6.0\tools\OpenCoverToCoberturaConverter.exe -input:coverage-results.xml -output:Cobertura.xml -sources:CodeCoverageHTML" />
   </Target>
    
 </Project>

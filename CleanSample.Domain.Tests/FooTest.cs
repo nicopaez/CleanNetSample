@@ -13,7 +13,8 @@ namespace CleanSample.Domain.Tests
         [Test]
         public void ShouldDoFoo()
         {
-            Assert.Pass();
+            var foo = new Foo();
+            Assert.AreEqual("Foo", foo.DoFoo());
         }
     }
 }
