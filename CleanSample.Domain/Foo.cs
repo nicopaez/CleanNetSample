@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CleanSample.Domain
 {
-    public class Foo
+
+    public class Foo : IFoo
     {
         public string DoFoo()
         {
